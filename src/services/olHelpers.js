@@ -22,6 +22,15 @@ angular.module('openlayers-directive').factory('olHelpers', function($q, $log) {
                     projection: map.getView().getProjection().getCode()
                 });
             });
+        } else if (eventType === 'pointerdrag') {
+            map.on('pointerdrag', function(e) {
+                var coord = e.coordinate;
+                scope.$emit('openlayers.map.' + eventType, {
+                    lat: coord[1],
+                    lon: coord[0],
+                    projection: map.getView().getProjection().getCode()
+                });
+            });
         }
     };
 
